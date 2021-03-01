@@ -57,7 +57,7 @@ sudo chmod +x init-container.sh
 
 Then build an image:
 ```bash
-sudo docker build -t docker-example .
+sudo docker build -t kata-example .
 ```
 
 ### 2. Start a container
@@ -68,17 +68,19 @@ Execute in a Linux terminal:
 sudo docker run --rm -it \
 --env HOSTNAME='my-container-1' \
 --env JOINCODE='fc94:b01d:1803:8dd8:3333:2222:1234:1111/xxxxxxxxxxxxxxxxx' \
--v my-container-1-v:/var/lib/husarnet \
--v /dev/net/tun:/dev/net/tun \
+--volume husarnet-ssh-v:/var/lib/husarnet \
+--volume husarnet-ssh-keys:/srv/sshd \
+--device /dev/net/tun \
 --cap-add NET_ADMIN \
 --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-docker-example
+--runtime kata-runtime \
+kata-example
 ```
 
 description:
 - `HOSTNAME='my-container-1'` - is an easy to use hostname, that you can use instead of Husarnet IPv6 addr to access your container over the internet
 - `JOINCODE='fc94:b01d:1803:8dd8:3333:2222:1234:1111/xxxxxxxxxxxxxxxxx'` - is an unique Join Code from your Husarnet network. You will find it at **https://app.husarnet.com -> choosen network -> `[Add element]` button ->  `join code` tab**
-- `-v my-container-1-v:/var/lib/husarnet` - you need to make `/var/lib/husarnet` as a volume to preserve it's state for example if you would like to update the image your container is based on. If you would like to run multiple containers on your host machine remember to provide unique volume name for each container (in our case `HOSTNAME-v`).
+- `--volume husarnet-ssh-v:/var/lib/husarnet` - you need to make `/var/lib/husarnet` a volume to preserve it's state. I.e. in case you would like to update the image your container is based on. If you would like to run multiple containers on your host machine remember to provide unique volume name for each container.
 
 ----------
 
