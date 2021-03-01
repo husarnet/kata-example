@@ -19,7 +19,7 @@ popd () {
 
 
 # Intall helper tools
-sudo apt-get install -y jq golang-go libelf-dev build-essential git
+sudo apt-get install -y jq golang-go libelf-dev build-essential git flex
 
 # Install kata 1.x runtime
 # Based on https://github.com/kata-containers/documentation/blob/master/install/ubuntu-installation-guide.md
