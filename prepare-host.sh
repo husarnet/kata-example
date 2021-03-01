@@ -19,7 +19,7 @@ popd () {
 
 
 # Intall helper tools
-sudo apt-get install -y jq
+sudo apt-get install -y jq golang-go
 
 # Install kata 1.x runtime
 # Based on https://github.com/kata-containers/documentation/blob/master/install/ubuntu-installation-guide.md
