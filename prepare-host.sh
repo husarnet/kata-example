@@ -19,7 +19,7 @@ popd () {
 
 
 # Intall helper tools
-sudo apt-get install -y jq golang-go
+sudo apt-get install -y jq golang-go libelf-dev build-essential git
 
 # Install kata 1.x runtime
 # Based on https://github.com/kata-containers/documentation/blob/master/install/ubuntu-installation-guide.md
@@ -50,7 +50,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 # Build kernel for the containers with some extra modules
-sudo apt-get install -y libelf-dev build-essential git
 
 if [ ! -d kata-packaging ]; then
     git clone https://github.com/kata-containers/packaging.git kata-packaging
